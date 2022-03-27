@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/tracks', (req, res) => {
+router.get('/', (req, res) => {
     const data = ['hola', 'mundo'];
 
     res.send({data})
