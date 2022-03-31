@@ -16,12 +16,13 @@ const validatorCreateItem = [
     (req, res, next) => {
         return validateResult(req, res, next);
     }
-
-
-
-
-
-
 ]
 
-module.exports = { validatorCreateItem };
+const validatorGetItem = [
+    check('id').exists().notEmpty().isMongoId(),
+    (req, res, next) => {
+        return validateResult(req, res, next);
+    }
+]
+
+module.exports = { validatorCreateItem, validatorGetItem };
