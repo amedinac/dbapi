@@ -14,6 +14,7 @@ const getItems = async (req, res) => {
         handleHttpError(res, 'ERROR_GET_ITEMS');
     }
 };
+
 const getItem = async (req, res) => {
     try{
         const { id } = matchedData(req);
