@@ -1,23 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../middleware/session');
 const customHeader = require('../middleware/customHeader');
 const { validatorCreateItem, validatorGetItem} = require('../validators/tracks');
 const { getItems, getItem, createItem, updateItem, deleteItem } = require('../controllers/tracks'); 
 
 //Route list Items
-router.get('/', getItems);
+router.get('/', authMiddleware, getItems);
 
 //Route detail of item
-router.get('/:id', validatorGetItem, getItem);
+router.get('/:id', authMiddleware, validatorGetItem, getItem);
 
 //Route Create item
-router.post('/', validatorCreateItem, createItem);
+router.post('/', authMiddleware, validatorCreateItem, createItem);
 
 //Route Update item
-router.put('/:id', validatorGetItem, validatorCreateItem, updateItem);
+router.put('/:id', authMiddleware, validatorGetItem, validatorCreateItem, updateItem);
 
 //Delete Item
-router.delete('/:id', validatorGetItem, deleteItem);
+router.delete('/:id', authMiddleware, validatorGetItem, deleteItem);
 
 
 module.exports = router;
