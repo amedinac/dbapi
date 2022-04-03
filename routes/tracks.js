@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const checkRol = require('../middleware/rol')
 const authMiddleware = require('../middleware/session');
 const customHeader = require('../middleware/customHeader');
 const { validatorCreateItem, validatorGetItem} = require('../validators/tracks');
@@ -12,7 +13,7 @@ router.get('/', authMiddleware, getItems);
 router.get('/:id', authMiddleware, validatorGetItem, getItem);
 
 //Route Create item
-router.post('/', authMiddleware, validatorCreateItem, createItem);
+router.post('/', authMiddleware, checkRol(['admin']), validatorCreateItem, createItem);
 
 //Route Update item
 router.put('/:id', authMiddleware, validatorGetItem, validatorCreateItem, updateItem);
